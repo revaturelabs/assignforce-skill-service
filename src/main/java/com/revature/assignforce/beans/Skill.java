@@ -42,6 +42,7 @@ public class Skill {
 			inverseJoinColumns=@JoinColumn(name="CURRICULUMID"))
 	private Set<CurriculumIdHolder> curricula;
 	
+	@Column(name="IS_ACTIVE")
 	private Boolean isActive;
 
 	//constructors

@@ -9,7 +9,4 @@ import com.revature.assignforce.beans.Skill;
 
 @Repository
 public interface SkillRepository extends JpaRepository<Skill, Integer>{
-
-	public List<Skill> findByTrainers(int id);
-	public List<Skill> findByCurricula(int id);
 }
