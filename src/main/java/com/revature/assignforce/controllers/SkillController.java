@@ -27,9 +27,9 @@ public class SkillController {
 	private SkillService skillServ;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Skill>> getAll() {
-		List<Skill> out = skillServ.getAll();
-		return new ResponseEntity<List<Skill>>(out, HttpStatus.OK);
+	public List<Skill> getAll() {
+		
+		return skillServ.getAll();
 	}
 
 	@GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
