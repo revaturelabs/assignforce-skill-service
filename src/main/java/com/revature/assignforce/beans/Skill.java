@@ -30,18 +30,6 @@ public class Skill {
 	@Column(name = "SKILLNAME") 
 	private String skillName;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="TRAINER_SKILLS",
-			joinColumns=@JoinColumn(name="SKILL_ID"),
-			inverseJoinColumns=@JoinColumn(name="TRAINERID"))
-	private Set<TrainerIdHolder> trainers;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="CURRICULUM_SKILLS",
-			joinColumns=@JoinColumn(name="SKILL_ID"),
-			inverseJoinColumns=@JoinColumn(name="CURRICULUMID"))
-	private Set<CurriculumIdHolder> curricula;
-	
 	@Column(name="IS_ACTIVE")
 	private Boolean isActive;
 
@@ -50,16 +38,13 @@ public class Skill {
 		super();
 	}
 
-	public Skill(int id, String name, Set<TrainerIdHolder> trainers, Set<CurriculumIdHolder> curricula) {
+	public Skill(int id, String skillName, Boolean isActive) {
 		super();
 		this.id = id;
-		this.skillName = name;
-		this.trainers = trainers;
-		this.curricula = curricula;
+		this.skillName = skillName;
+		this.isActive = isActive;
 	}
 
-	
-	//Getters and Setters
 	public int getId() {
 		return id;
 	}
@@ -76,29 +61,11 @@ public class Skill {
 		this.skillName = skillName;
 	}
 
-	public Set<TrainerIdHolder> getTrainers() {
-		return trainers;
-	}
-
-	public void setTrainers(Set<TrainerIdHolder> trainers) {
-		this.trainers = trainers;
-	}
-
-	public Set<CurriculumIdHolder> getCurricula() {
-		return curricula;
-	}
-
-	public void setCurricula(Set<CurriculumIdHolder> curricula) {
-		this.curricula = curricula;
-	}
-
 	public Boolean getIsActive() {
 		return isActive;
 	}
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
-	}
-	
-	
+	}	
 }
