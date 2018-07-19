@@ -48,8 +48,8 @@ public class SkillController {
 	@PostMapping(value = "by-array", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Skill>> getByArray(@RequestBody SkillsArray arr) {
 		List<Skill> skills = new ArrayList<Skill>();
-		for (Integer id : arr.getSkills()) {
-			Optional<Skill> temp = skillServ.getSkillById(id);
+		for (Skill skl : arr.getSkills()) {
+			Optional<Skill> temp = skillServ.getSkillById(skl.getSkillId());
 			if (temp.isPresent()) {
 				skills.add(temp.get());
 			}

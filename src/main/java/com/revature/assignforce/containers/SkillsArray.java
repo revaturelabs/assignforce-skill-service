@@ -2,24 +2,26 @@ package com.revature.assignforce.containers;
 
 import java.util.ArrayList;
 
+import com.revature.assignforce.beans.Skill;
+
 public class SkillsArray {
-	ArrayList<Integer> skills;
+	ArrayList<Skill> skills;
 
 	public SkillsArray() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public SkillsArray(ArrayList<Integer> skills) {
+	public SkillsArray(ArrayList<Skill> skills) {
 		super();
 		this.skills = skills;
 	}
 
-	public ArrayList<Integer> getSkills() {
+	public ArrayList<Skill> getSkills() {
 		return skills;
 	}
 
-	public void setSkills(ArrayList<Integer> skills) {
+	public void setSkills(ArrayList<Skill> skills) {
 		this.skills = skills;
 	}	
 	

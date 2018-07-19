@@ -25,7 +25,7 @@ public class Skill {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill")
 	@SequenceGenerator(name="skill", sequenceName="skill_seq", allocationSize=1)
 	@Column(name="SKILL_ID")
-	private int id;
+	private int skillId;
 	
 	@Column(name = "SKILLNAME") 
 	private String skillName;
@@ -38,19 +38,19 @@ public class Skill {
 		super();
 	}
 
-	public Skill(int id, String skillName, Boolean isActive) {
+	public Skill(int skillId, String skillName, Boolean isActive) {
 		super();
-		this.id = id;
+		this.skillId = skillId;
 		this.skillName = skillName;
 		this.isActive = isActive;
 	}
 
-	public int getId() {
-		return id;
+	public int getSkillId() {
+		return skillId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setSkillId(int skillId) {
+		this.skillId = skillId;
 	}
 
 	public String getSkillName() {
