@@ -25,16 +25,11 @@ import com.revature.assignforce.containers.SkillsArray;
 import com.revature.assignforce.services.SkillService;
 
 @RestController
+@CrossOrigin
 public class SkillController {
 
 	@Autowired
 	private SkillService skillServ;
-	
-	@ModelAttribute
-	public void setVaryResponseHeader(HttpServletResponse response) {
-	    response.setHeader("Access-Control-Allow-Origin", "*");
-	    response.setHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH");
-	}   
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Skill> getAll() {
