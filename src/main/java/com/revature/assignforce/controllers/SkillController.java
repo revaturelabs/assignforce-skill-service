@@ -25,7 +25,6 @@ import com.revature.assignforce.containers.SkillsArray;
 import com.revature.assignforce.services.SkillService;
 
 @RestController
-@CrossOrigin
 public class SkillController {
 
 	@Autowired
