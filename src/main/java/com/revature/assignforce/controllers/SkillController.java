@@ -40,7 +40,7 @@ public class SkillController {
 		return new ResponseEntity<Skill>(skill.get(), HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/by-array/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "by-array", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Skill>> getByArray(@RequestBody SkillsArray arr) {
 		List<Skill> skills = new ArrayList<Skill>();
 		for (Integer id : arr.getSkills()) {
