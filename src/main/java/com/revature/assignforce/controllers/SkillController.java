@@ -51,7 +51,7 @@ public class SkillController {
 				skills.add(temp.get());
 			}
 		}
-		return new ResponseEntity<List<Skill>>(skills, HttpStatus.OK);
+		return new ResponseEntity<>(skills, HttpStatus.OK);
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
