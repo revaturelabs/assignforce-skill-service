@@ -1,7 +1,7 @@
 package com.revature.assignforce;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
@@ -9,7 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class SkillServiceApplication {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SkillServiceApplication.class, args);
+		new SpringApplicationBuilder(SkillServiceApplication.class).run(args);
 	}
 
 }
