@@ -68,7 +68,7 @@ public class SkillController {
 		}
 	}
 
-	@DeleteMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "{id}")
 	public ResponseEntity<Skill> deleteSkill(@PathVariable("id") int id) {
 		skillServ.deleteSkill(id);
 		return new ResponseEntity<Skill>(HttpStatus.OK);
