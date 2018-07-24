@@ -97,6 +97,23 @@ public class SkillControllerTest {
 	}
 	
 	@Test
+	public void getByArrayTest2() {
+		Skill s1 = new Skill(7, "C++", true);
+		Skill s2 = new Skill(18, "C#", false);
+		List<Skill> skillSet = new ArrayList<Skill>();
+		skillSet.add(s1);
+		skillSet.add(s2);
+		SkillsArray sArray = new SkillsArray();
+		sArray.setSkills(skillSet);
+		Optional<Skill> op1 = Optional.ofNullable(s1);
+		Mockito.when(skillRepository.findById(7)).thenReturn(op1);
+		Optional<Skill> op2 = Optional.ofNullable(s2);
+		Mockito.when(skillRepository.findById(18)).thenReturn(op2);
+		ResponseEntity<List<Skill>> reTest = skillController.getByArray(sArray);
+		assertTrue(reTest.getBody().size() == 2 && reTest.getStatusCode() == HttpStatus.OK);
+	}
+	
+	@Test
 	public void saveNewSkillTestOk() {
 		Skill s1 = new Skill(7, "C++", true);
 		Mockito.when(skillRepository.save(s1)).thenReturn(s1);

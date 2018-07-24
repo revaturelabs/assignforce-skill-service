@@ -77,7 +77,7 @@ public class SkillServiceImplTest {
 		Skill s1 = new Skill(5, "Hibernate", true);
 		s1.setIsActive(false);
 		Mockito.when(skillRepository.save(s1)).thenReturn(s1);
-		Skill testSkill = skillService.createSkill(s1);
+		Skill testSkill = skillService.updateSkill(s1);
 		assertFalse(testSkill.getIsActive());
 	}
 	
