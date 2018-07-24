@@ -45,8 +45,6 @@ public class SkillControllerTest {
 	}
 	
 	@Autowired
-	private SkillService skillService;
-	@Autowired
 	private SkillRepository skillRepository;
 	@Autowired
 	private SkillController skillController;
