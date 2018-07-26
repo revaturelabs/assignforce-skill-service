@@ -1,19 +1,24 @@
 package com.revature.assignforce.testing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.revature.assignforce.beans.Skill;
-import com.revature.assignforce.repository.SkillRepository;
-import com.revature.assignforce.services.SkillSerrviceImpl;
-import com.revature.assignforce.services.SkillService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -26,7 +31,7 @@ public class SkillTest {
 		return new Skill();
 		}
 	}
-	
+
 	@Test
 	public void skillTest1() {
 		Skill s1 = new Skill();
@@ -59,5 +64,25 @@ public class SkillTest {
 		s1.setIsActive(true);
 		assertTrue(s1.getIsActive());
 	}
+	
+    @Test
+    public void testSkillWithNoValues() {
+        Skill s1 = new Skill();
 
+        // validate the input
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Skill>> violations = validator.validate(s1);
+        assertEquals(3, violations.size());
+    }
+    
+    @Test
+    public void testValidSkill() {
+    	Skill s1 = new Skill(3, "Swift", true);
+    	
+    	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    	Validator validator = factory.getValidator();
+    	Set<ConstraintViolation<Skill>> violations = validator.validate(s1);
+    	assertEquals(0, violations.size());
+    }
 }

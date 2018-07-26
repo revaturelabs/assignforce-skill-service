@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -21,10 +24,14 @@ public class Skill {
 	@Column(name="SKILL_ID")
 	private int skillId;
 	
-	@Column(name = "SKILLNAME") 
+	@Column(name = "SKILLNAME")
+	@NotNull
+	@NotEmpty
+	@Size(min = 1, max = 128)
 	private String skillName;
 	
 	@Column(name="IS_ACTIVE")
+	@NotNull
 	private Boolean isActive;
 
 	//constructors
