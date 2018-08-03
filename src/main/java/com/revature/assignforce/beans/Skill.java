@@ -7,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
@@ -25,7 +25,7 @@ public class Skill {
 	@Column(name="SKILL_ID")
 	@NotNull(message = "Skill must have id.", groups = {New.class, Existing.class})
 	@Range(min = 0, max = 0, message = "New Skill must have id of 0", groups = {New.class})
-	@Min(value = 1, message = "Existing Skill must have id of at least 1", groups = {Existing.class})
+	@Positive(message = "Existing Skill must have a positive id number", groups = {Existing.class})
 	private Integer skillId;
 	
 	@Column(name = "SKILLNAME")
