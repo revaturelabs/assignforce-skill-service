@@ -90,9 +90,7 @@ public class SkillTest {
     
     @Test
     public void testValidNewSkill() {
-    	Skill s1 = new Skill();
-    	s1.setSkillName("Swift");
-    	s1.setIsActive(true);
+    	Skill s1 = new Skill(0, "Swift", true);
     	
     	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     	Validator validator = factory.getValidator();
