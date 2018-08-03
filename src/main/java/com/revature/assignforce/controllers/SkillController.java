@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +46,7 @@ public class SkillController {
 	}
 
 	@PostMapping(value = "by-array", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Skill>> getByArray(@RequestBody SkillsArray arr) {
+	public ResponseEntity<List<Skill>> getByArray(@RequestBody @Valid SkillsArray arr) {
 		List<Skill> skills = new ArrayList<>();
 		for (Skill skl : arr.getSkills()) {
 			Optional<Skill> temp = skillServ.getSkillById(skl.getSkillId());
@@ -55,7 +58,7 @@ public class SkillController {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Skill> saveNewSkill(@RequestBody Skill skill) {
+	public ResponseEntity<Skill> saveNewSkill(@RequestBody @Validated(Skill.New.class) Skill skill) {
 		Skill newSkill = skillServ.createSkill(skill);
 
 		if (newSkill != null) {
@@ -72,7 +75,7 @@ public class SkillController {
 	}
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Skill> updateSkill(@RequestBody Skill skill) {
+	public ResponseEntity<Skill> updateSkill(@RequestBody @Validated(Skill.Existing.class) Skill skill) {
 		Skill newSkill = skillServ.createSkill(skill);
 
 		if (newSkill != null) {
