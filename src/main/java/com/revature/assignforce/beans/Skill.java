@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
@@ -25,11 +24,10 @@ public class Skill {
 	@Column(name="SKILL_ID")
 	@Null(message = "New Skill must not have id.", groups = New.class)
 	@NotNull(message = "Existing Skill must have id.", groups = Existing.class)
-	private int skillId;
+	private Integer skillId;
 	
 	@Column(name = "SKILLNAME")
 	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
-	@NotBlank(message = "Skill name must not be blank.", groups = {New.class, Existing.class})
 	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
 	private String skillName;
 	
