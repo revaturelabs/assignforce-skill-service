@@ -1,4 +1,4 @@
-package com.revature.messages.config;
+package com.revature.assignforce.messaging.config;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;

@@ -1,4 +1,4 @@
-package com.revature.messaging.producer;
+package com.revature.assignforce.messaging.messenger; 
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ public class SkillMessenger {
 	@Value("${spring.rabbitmq.exchange:assignforce}")
 	private String exchange;
 
-	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill.delete")
+	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill.delete}")
 	private String routingKey;
 
 	@Inject
