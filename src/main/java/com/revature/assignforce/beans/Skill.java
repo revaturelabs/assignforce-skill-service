@@ -7,7 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,14 +23,24 @@ public class Skill {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill")
 	@SequenceGenerator(name="skill", sequenceName="skill_seq", allocationSize=1)
 	@Column(name="SKILL_ID")
-	private int skillId;
+	@NotNull(message = "Skill must have id.", groups = {New.class, Existing.class})
+	@Range(min = 0, max = 0, message = "New Skill must have id of 0", groups = {New.class})
+	@Positive(message = "Existing Skill must have a positive id number", groups = {Existing.class})
+	private Integer skillId;
 	
-	@Column(name = "SKILLNAME") 
+	@Column(name = "SKILLNAME")
+	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
+	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
 	private String skillName;
 	
 	@Column(name="IS_ACTIVE")
+	@NotNull(message = "Skill must define whether it is active.", groups = {New.class, Existing.class})
 	private Boolean isActive;
 
+	//Validation groups
+	public interface Existing {}
+	public interface New {}
+	
 	//constructors
 	public Skill() {
 		super();
