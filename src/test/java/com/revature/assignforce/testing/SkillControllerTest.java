@@ -49,6 +49,8 @@ public class SkillControllerTest {
 	@Autowired
 	private SkillController skillController;
 	
+	// This function test whether the skills that created are actually saved in the Database
+	// and returns all the skills that are saved 
 	@Test
 	public void getAllTest() {
 		Skill s1 = new Skill(2, "Spring", true);
@@ -61,6 +63,9 @@ public class SkillControllerTest {
 		assertTrue(testList.size() == 2);
 	}
 	
+	// This function test whether the getSkillId() returns the correct id associated with the skill
+	// object and that the HTTP status is 'ok' if the getSkillId() method corresponds with skill 
+	// object's id 
 	@Test
 	public void getByIdTestOk() {
 		Skill s1 = new Skill(2, "Spring", true);
@@ -70,15 +75,21 @@ public class SkillControllerTest {
 		assertTrue(reTest.getBody().getSkillId() == 2 && reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
+	// This function test if the HTTP status is set to Response Entity is set to 'NOT_FOUND' 
+	// when you try to get a skill Id that is not saved or yet instantiated  
 	@Test
 	public void getByIdTestNotFound() {
 		ResponseEntity<Skill> reTest = skillController.getById(13);
 		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
 	}
 
+
 	// Add check for same Id and make sure skills cannot have same ID
 	// Currently, skill id can be duplicates and will increase skill size
 	// Also have it so that one cannot make duplicate skill name with different ID.
+
+	// This function test whether the skills that are not null are saved in the Array list and that the
+	// list returns the right number of skill objects that set the HTTP status is set to 'ok'
 	@Test
 	public void getByArrayTest() {
 		Skill s1 = new Skill(2, "Spring", true);
@@ -103,6 +114,8 @@ public class SkillControllerTest {
 		assertTrue(reTest.getBody().size() == 4 && reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
+	// This function test whether the setSkill() saves all the skills to a new list and that the 
+	// HTTP status is set to 'ok'
 	@Test
 	public void getByArrayTest2() {
 		Skill s1 = new Skill(7, "C++", true);
@@ -120,6 +133,8 @@ public class SkillControllerTest {
 		assertTrue(reTest.getBody().size() == 2 && reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
+	// This function test to see if the saveNewSkill() method saves the new skill object to the list 
+	// and returns the HTTP status 'ok' if true 
 	@Test
 	public void saveNewSkillTestOk() {
 		Skill s1 = new Skill(7, "C++", true);
@@ -128,6 +143,8 @@ public class SkillControllerTest {
 		assertTrue(reTest.getBody().getSkillId() == 7 && reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
+	// This function will test if a skill object that is created is not a duplicate and will not save the
+	// newly created object and will return HTTP status 'NOT_FOUND'
 	@Test
 	public void saveNewSkillTestNotFound() {
 		Skill s1 = new Skill(7, "C#", true);
@@ -137,6 +154,9 @@ public class SkillControllerTest {
 
 	// Checked Id 8 to make sure it really was deleted, and it then checked
 	// status code to make sure it was not found.
+	
+	// This function will test whether the deleteById() method deletes skill object with the corresponding 
+	// id that is being requested to delete
 	@Test
 	public void deleteSkillTest() {
 		Mockito.doNothing().when(skillRepository).deleteById(8);
@@ -145,6 +165,8 @@ public class SkillControllerTest {
 		assertTrue(reTest2.getStatusCode() == HttpStatus.NOT_FOUND);
 	}
 	
+	// This function will test whether the updateSkill() method updates the current skill object that is saved 
+	// and will return the HTTP status 'ok' if updated 
 	@Test
 	public void updateSkillTestOk() {
 		Skill s1 = new Skill(7, "C++", true);
@@ -154,6 +176,8 @@ public class SkillControllerTest {
 		assertTrue(reTest.getBody().getIsActive() == false && reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
+	// This function will test the updateSkill if you try to update a skill object that does not exist and will
+	// return the HTTP status 'NOT_FOUND'
 	@Test
 	public void updateSkillTestNotFound() {
 		Skill s1 = new Skill(9, "Scala", true);

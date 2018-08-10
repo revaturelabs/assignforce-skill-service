@@ -1,10 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.revature.assignforce</groupId>
-	<artifactId>skillservice</artifactId>
+	<artifactId>AssignForceSkillService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>SkillService</name>
 	<description>The Skill Service of the AssignForce Application</description>
 
@@ -26,19 +30,13 @@
 	<dependencies>
 
 		<dependency>
-
 			<groupId>io.pivotal.spring.cloud</groupId>
-
 			<artifactId>spring-cloud-services-starter-config-client</artifactId>
-
 		</dependency>
 
 		<dependency>
-
 			<groupId>io.pivotal.spring.cloud</groupId>
-
 			<artifactId>spring-cloud-services-starter-service-registry</artifactId>
-
 		</dependency>
 
 		<dependency>
@@ -46,45 +44,38 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 			<version>2.0.0.RELEASE</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<version>12.1.0.2</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<!-- Added dependencies for unit testing -->
+		<!-- Added dependencies for Unit testing -->
 		<dependency>
     		<groupId>junit</groupId>
     		<artifactId>junit</artifactId>
@@ -103,49 +94,86 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+	        <groupId>org.springframework.cloud</groupId>
+	        <artifactId>spring-cloud-starter-openfeign</artifactId>
+	    </dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.netflix.hystrix/hystrix-javanica -->
+		<dependency>
+		    <groupId>com.netflix.hystrix</groupId>
+		    <artifactId>hystrix-javanica</artifactId>
+		    <version>1.5.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+		
+
+	<dependency>	
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-config</artifactId>
+	</dependency>
 	</dependencies>
-
+	
 	<dependencyManagement>
-
-		<dependencies>
-
-			<dependency>
-
+	    <dependencies>
+		    <dependency>
 				<groupId>org.springframework.cloud</groupId>
-
 				<artifactId>spring-cloud-dependencies</artifactId>
-
 				<version>${spring-cloud.version}</version>
-
 				<type>pom</type>
-
 				<scope>import</scope>
-
 			</dependency>
-
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-openfeign</artifactId>
+	            <version>2.0.1.BUILD-SNAPSHOT</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
 			<dependency>
-
 				<groupId>io.pivotal.spring.cloud</groupId>
-
 				<artifactId>spring-cloud-services-dependencies</artifactId>
-
 				<version>${spring-cloud-services.version}</version>
-
 				<type>pom</type>
-
 				<scope>import</scope>
-
 			</dependency>
-
-		</dependencies>
-
+	    </dependencies>
 	</dependencyManagement>
+	<repositories>
+		<repository>
+			<id>spring-libs-release</id>
+			<name>Spring Releases</name>
+			<url>https://repo.spring.io/libs-release</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/libs-milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+	        <id>spring-snapshots</id>
+	        <name>Spring Snapshots</name>
+	        <url>https://repo.spring.io/libs-snapshot</url>
+	        <snapshots>
+	            <enabled>true</enabled>
+	        </snapshots>
+	    </repository>
+	</repositories>
 
 	<build>
 		<finalName>skill-service</finalName>
 		<plugins>
-    <plugin>
+        <plugin>
         <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.0</version>
@@ -201,7 +229,8 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			
 		</plugins>
 	</build>
-
 </project>
