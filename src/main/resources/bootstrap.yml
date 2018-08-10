@@ -1,7 +1,7 @@
-spring:
-  cloud:
-    config:
-      name: skill-service
-      discovery:
-        service-id: config-service
-        enabled: true
+#spring:
+#  cloud:
+#    config:
+#      name: skill-service
+#      discovery:
+#        service-id: config-service
+#        enabled: true

@@ -75,16 +75,21 @@ public class SkillControllerTest {
 		ResponseEntity<Skill> reTest = skillController.getById(13);
 		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
 	}
-	
+
+	// Add check for same Id and make sure skills cannot have same ID
+	// Currently, skill id can be duplicates and will increase skill size
+	// Also have it so that one cannot make duplicate skill name with different ID.
 	@Test
 	public void getByArrayTest() {
 		Skill s1 = new Skill(2, "Spring", true);
 		Skill s2 = new Skill(1, "Java", true);
 		Skill s3 = new Skill(4, "PHP", false);
+		Skill s4 = new Skill(4, "HTML", false);
 		List<Skill> skillList = new ArrayList<Skill>();
 		skillList.add(s1);
 		skillList.add(s2);
 		skillList.add(s3);
+		skillList.add(s4);
 		SkillsArray sArray = new SkillsArray(skillList);
 		Optional<Skill> op1 = Optional.ofNullable(s1);
 		Mockito.when(skillRepository.findById(2)).thenReturn(op1);
@@ -92,8 +97,10 @@ public class SkillControllerTest {
 		Mockito.when(skillRepository.findById(1)).thenReturn(op2);
 		Optional<Skill> op3 = Optional.ofNullable(s3);
 		Mockito.when(skillRepository.findById(4)).thenReturn(op3);
+		Optional<Skill> op4 = Optional.ofNullable(s4);
+		Mockito.when(skillRepository.findById(4)).thenReturn(op4);
 		ResponseEntity<List<Skill>> reTest = skillController.getByArray(sArray);
-		assertTrue(reTest.getBody().size() == 3 && reTest.getStatusCode() == HttpStatus.OK);
+		assertTrue(reTest.getBody().size() == 4 && reTest.getStatusCode() == HttpStatus.OK);
 	}
 	
 	@Test
@@ -127,12 +134,15 @@ public class SkillControllerTest {
 		ResponseEntity<Skill> reTest = skillController.saveNewSkill(s1);
 		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
 	}
-	
+
+	// Checked Id 8 to make sure it really was deleted, and it then checked
+	// status code to make sure it was not found.
 	@Test
 	public void deleteSkillTest() {
 		Mockito.doNothing().when(skillRepository).deleteById(8);
 		ResponseEntity<Skill> reTest = skillController.deleteSkill(8);
-		assertTrue(reTest.getStatusCode() == HttpStatus.OK);
+		ResponseEntity<Skill> reTest2 = skillController.getById(8);
+		assertTrue(reTest2.getStatusCode() == HttpStatus.NOT_FOUND);
 	}
 	
 	@Test

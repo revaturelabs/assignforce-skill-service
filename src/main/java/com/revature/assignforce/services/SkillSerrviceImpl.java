@@ -28,8 +28,14 @@ public class SkillSerrviceImpl implements SkillService {
 		return skillRepo.findAll();
 	}
 
-	@Override
+	@Override // Create Check for Duplicate skill name. If duplicate, ignore.
 	public Skill createSkill(Skill skill) {
+
+		// @Column name
+		// @Column id
+		// if name || id == new name || new id
+		// skip / cancel create skill
+
 		return skillRepo.save(skill);
 	}
 

@@ -1,4 +1,6 @@
-FROM java:8
-ADD target/skill-service.jar .
-EXPOSE 8001
-CMD java -jar -Xmx512M skill-service.jar
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE
+EXPOSE 8675
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/urandom", "-jar", "/app.jar"]
