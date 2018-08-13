@@ -1,14 +1,17 @@
 package com.revature.assignforce.testing;
 
 import static org.junit.Assert.*;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.assignforce.messaging.messenger.SkillMessenger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -26,13 +29,19 @@ public class SkillServiceImplTest {
 
 	@Configuration
 	static class SkillServiceTestContextConfiguration {
-	@Bean
-	public SkillService SkillService() {
-		return new SkillSerrviceImpl();
+		@Bean
+		public SkillService skillService() {
+			return new SkillSerrviceImpl();
 		}
-	@Bean
-	public SkillRepository SkillRepository() {
-		return Mockito.mock(SkillRepository.class);
+
+		@Bean
+		public SkillRepository SkillRepository() {
+			return Mockito.mock(SkillRepository.class);
+		}
+
+		@Bean
+		public SkillMessenger skillMessenger() {
+			return Mockito.mock(SkillMessenger.class);
 		}
 	}
 	
@@ -40,7 +49,8 @@ public class SkillServiceImplTest {
 	private SkillService skillService;
 	@Autowired
 	private SkillRepository skillRepository;
-	
+	@Autowired
+	private SkillMessenger skillMessenger;
 	// This function test whether the getSkillId() returns the correct id associated with the skill
 	// object and that the HTTP status is 'ok' if the getSkillId() method corresponds with skill 
 	// object's id 
@@ -94,8 +104,7 @@ public class SkillServiceImplTest {
 	public void deleteSkillTest() {
 		Mockito.doNothing().when(skillRepository).deleteById(7);
 		skillService.deleteSkill(7);
-		Optional<Skill> opTest = skillService.getSkillById(7);
-		assertFalse(opTest.isPresent());
+		Mockito.verify(skillRepository, times(1)).deleteById(7);
 	}
 
 }
