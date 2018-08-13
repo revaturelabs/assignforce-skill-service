@@ -3,6 +3,7 @@ package com.revature.assignforce.messaging.messenger;
 import javax.inject.Inject;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class SkillMessenger {
 	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill.delete")
 	private String routingKey;
 
-	@Inject
+	@Autowired
 	public SkillMessenger(RabbitTemplate rabbitTemplate) {
 		super();
 		this.rabbitTemplate = rabbitTemplate;
