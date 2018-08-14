@@ -49,7 +49,7 @@ public class SkillSerrviceImpl implements SkillService {
 
 	@Override
 	public void deleteSkill(int id) {
-	    skillMessenger.sendDeletionMessage(id);
+//	    skillMessenger.sendDeletionMessage(id);
 		skillRepo.deleteById(id);
 		
 	}

@@ -23,18 +23,18 @@ public class Skill {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill")
 	@SequenceGenerator(name="skill", sequenceName="skill_seq", allocationSize=1)
 	@Column(name="SKILL_ID")
-	@NotNull(message = "Skill must have id.", groups = {New.class, Existing.class})
-	@Range(min = 0, max = 0, message = "New Skill must have id of 0", groups = {New.class})
-	@Positive(message = "Existing Skill must have a positive id number", groups = {Existing.class})
+//	@NotNull(message = "Skill must have id.", groups = {New.class, Existing.class})
+//	@Range(min = 0, max = 0, message = "New Skill must have id of 0", groups = {New.class})
+//	@Positive(message = "Existing Skill must have a positive id number", groups = {Existing.class})
 	private Integer skillId;
 	
 	@Column(name = "SKILLNAME")
-	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
-	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
+//	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
+//	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
 	private String skillName;
 	
 	@Column(name="IS_ACTIVE")
-	@NotNull(message = "Skill must define whether it is active.", groups = {New.class, Existing.class})
+//	@NotNull(message = "Skill must define whether it is active.", groups = {New.class, Existing.class})
 	private Boolean isActive;
 
 	//Validation groups

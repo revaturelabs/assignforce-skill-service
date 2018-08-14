@@ -16,8 +16,8 @@ public class SkillMessenger {
 	@Value("${spring.rabbitmq.exchange:assignforce}")
 	private String exchange;
 
-	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill.delete")
-	private String routingKey;
+//	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill.delete")
+//	private String routingKey;
 
 	@Inject
 	public SkillMessenger(RabbitTemplate rabbitTemplate) {
@@ -25,7 +25,7 @@ public class SkillMessenger {
 		this.rabbitTemplate = rabbitTemplate;
 	}
 
-	public void sendDeletionMessage(int id) {
-		rabbitTemplate.convertAndSend(exchange, routingKey, id);
-	}
+//	public void sendDeletionMessage(int id) {
+//		rabbitTemplate.convertAndSend(exchange, routingKey, id);
+//	}
 }
