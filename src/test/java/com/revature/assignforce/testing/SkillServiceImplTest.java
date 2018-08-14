@@ -95,9 +95,6 @@ public class SkillServiceImplTest {
 		assertFalse(testSkill.getIsActive());
 	}
 
-
-	// Rabbit cannot use deletion so had to comment out those parts.
-
 	// This function test to see if the deleteById() method deletes the associated skill obeject with the 
 	// corresponding id, returns false if it does not delete
 	@Test
