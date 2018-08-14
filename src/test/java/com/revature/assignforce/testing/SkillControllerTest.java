@@ -32,17 +32,24 @@ public class SkillControllerTest {
 
 	@Configuration
 	static class SkillServiceTestContextConfiguration {
-	@Bean
-	public SkillService SkillService() {
-		return new SkillSerrviceImpl();
+		@Bean
+		public SkillService SkillService() {
+			return new SkillSerrviceImpl();
 		}
-	@Bean
-	public SkillRepository SkillRepository() {
-		return Mockito.mock(SkillRepository.class);
+
+		@Bean
+		public SkillRepository SkillRepository() {
+			return Mockito.mock(SkillRepository.class);
 		}
-	@Bean
-	public SkillController SkillController() {
-		return new SkillController();
+
+		@Bean
+		public SkillController SkillController() {
+			return new SkillController();
+		}
+
+		@Bean
+		public SkillMessenger skillMessenger() {
+			return Mockito.mock(SkillMessenger.class);
 		}
 	@Bean
 	public SkillMessenger SkillMessenger() { return new SkillMessenger(new RabbitTemplate()); }
