@@ -81,6 +81,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		
 		<!-- Added dependencies for Unit testing -->
 		<dependency>
@@ -122,7 +127,16 @@
 	<!-- <dependency>	
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-config</artifactId>
+
+	</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
 	</dependency> -->
+
 	</dependencies>
 	
 	<dependencyManagement>

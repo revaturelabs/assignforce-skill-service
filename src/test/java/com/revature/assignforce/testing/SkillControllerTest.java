@@ -10,6 +10,7 @@ import com.revature.assignforce.messaging.messenger.SkillMessenger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -50,12 +51,18 @@ public class SkillControllerTest {
 		public SkillMessenger skillMessenger() {
 			return Mockito.mock(SkillMessenger.class);
 		}
+	@Bean
+	public SkillMessenger SkillMessenger() { return new SkillMessenger(new RabbitTemplate()); }
+
 	}
 	
 	@Autowired
 	private SkillRepository skillRepository;
 	@Autowired
 	private SkillController skillController;
+	@Autowired
+	private SkillMessenger skillMessenger;
+
 	
 	// This function test whether the skills that created are actually saved in the Database
 	// and returns all the skills that are saved 

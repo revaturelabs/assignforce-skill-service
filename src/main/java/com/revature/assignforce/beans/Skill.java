@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
@@ -18,7 +19,9 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="SKILL")
 public class Skill {
-	
+
+	// Weird Annotations
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill")
 	@SequenceGenerator(name="skill", sequenceName="skill_seq", allocationSize=1)
@@ -29,6 +32,7 @@ public class Skill {
 	private Integer skillId;
 	
 	@Column(name = "SKILLNAME")
+	@NotEmpty(message = "Skill must not be empty.")
 	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
 	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
 	private String skillName;

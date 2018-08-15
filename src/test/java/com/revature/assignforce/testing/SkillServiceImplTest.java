@@ -17,18 +17,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import com.revature.assignforce.beans.Skill;
 import com.revature.assignforce.repository.SkillRepository;
 import com.revature.assignforce.services.SkillSerrviceImpl;
 import com.revature.assignforce.services.SkillService;
+import com.revature.assignforce.messaging.messenger.SkillMessenger;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class SkillServiceImplTest {
 
+	// Add this section for application context.
 	@Configuration
 	static class SkillServiceTestContextConfiguration {
+
 		@Bean
 		public SkillService skillService() {
 			return new SkillSerrviceImpl();
@@ -43,6 +48,8 @@ public class SkillServiceImplTest {
 		public SkillMessenger skillMessenger() {
 			return Mockito.mock(SkillMessenger.class);
 		}
+	@Bean
+		public SkillMessenger SkillMessenger() { return Mockito.mock(SkillMessenger.class); }
 	}
 	
 	@Autowired
@@ -51,6 +58,7 @@ public class SkillServiceImplTest {
 	private SkillRepository skillRepository;
 	@Autowired
 	private SkillMessenger skillMessenger;
+
 	// This function test whether the getSkillId() returns the correct id associated with the skill
 	// object and that the HTTP status is 'ok' if the getSkillId() method corresponds with skill 
 	// object's id 
@@ -97,7 +105,7 @@ public class SkillServiceImplTest {
 		Skill testSkill = skillService.updateSkill(s1);
 		assertFalse(testSkill.getIsActive());
 	}
-	
+
 	// This function test to see if the deleteById() method deletes the associated skill obeject with the 
 	// corresponding id, returns false if it does not delete
 	@Test
