@@ -39,6 +39,6 @@ public class SkillMessenger {
 
 	public void sendDeactivateMessage(int id) {
 		logger.info("Sending deactivation message for skill " + id);
-		rabbitTemplate.convertAndSend(exchange, deactivateKey, id);
+		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill.deactivate", id);
 	}
 }
