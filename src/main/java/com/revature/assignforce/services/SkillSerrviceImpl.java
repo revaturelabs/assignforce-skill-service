@@ -44,6 +44,7 @@ public class SkillSerrviceImpl implements SkillService {
 
 	@Override
 	public Skill updateSkill(Skill skill) {
+		skillMessenger.sendDeactivateMessage(skill.getSkillId());
 		return skillRepo.save(skill);
 	}
 

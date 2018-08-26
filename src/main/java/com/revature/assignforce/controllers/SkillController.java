@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +28,8 @@ import com.revature.assignforce.services.SkillService;
 
 @RestController
 public class SkillController {
+
+	Logger logger = LoggerFactory.getLogger(SkillController.class);
 
 	@Autowired
 	private SkillService skillServ;
@@ -75,7 +79,11 @@ public class SkillController {
 
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> updateSkill(@RequestBody @Validated(Skill.Existing.class) Skill skill) {
-		Skill newSkill = skillServ.createSkill(skill);
+		logger.info("Updating skill ", skill.getSkillName());
+
+		//we are going to assume that we are only deactivating
+		//the skill for now
+		Skill newSkill = skillServ.updateSkill(skill);
 
 		if (newSkill != null) {
 			return new ResponseEntity<>(newSkill, HttpStatus.OK);
