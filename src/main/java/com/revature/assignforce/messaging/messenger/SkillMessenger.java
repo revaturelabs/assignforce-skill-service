@@ -34,7 +34,7 @@ public class SkillMessenger {
 
 	public void sendCreateMessage(int id){
 		logger.info("Sending create message for skill " +id);
-		rabbitTemplate.convertAndSend(exchange, "assignforce.skill.create", id);
+		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill.create", id);
 	}
 
 	public void sendDeletionMessage(int id) {
