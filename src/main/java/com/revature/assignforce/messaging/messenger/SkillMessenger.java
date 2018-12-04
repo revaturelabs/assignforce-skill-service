@@ -32,6 +32,11 @@ public class SkillMessenger {
 		this.rabbitTemplate = rabbitTemplate;
 	}
 
+	public void sendCreateMessage(int id){
+		logger.info("Sending create message for skill " +id);
+		rabbitTemplate.convertAndSend(exchange, "assignforce.skill.create", id);
+	}
+
 	public void sendDeletionMessage(int id) {
 		logger.info("Sending deletion message for skill " + id);
 		rabbitTemplate.convertAndSend(exchange, routingKey, id);
