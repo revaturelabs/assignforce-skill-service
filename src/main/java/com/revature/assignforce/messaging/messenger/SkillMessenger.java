@@ -1,5 +1,6 @@
 package com.revature.assignforce.messaging.messenger; 
 
+import com.revature.assignforce.messaging.SkillMessage;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -34,19 +35,19 @@ public class SkillMessenger {
 
 	public void sendCreateMessage(int id){
 		logger.info("Sending create message for skill " +id);
-		Object message[] = {id, "create"};
+		SkillMessage message = new SkillMessage(id, "create");
 		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill", message);
 	}
 
 	public void sendDeletionMessage(int id) {
 		logger.info("Sending deletion message for skill " + id);
-		Object message[] = {id, "delete"};
+		SkillMessage message = new SkillMessage(id, "delete");
 		rabbitTemplate.convertAndSend(exchange, routingKey, message);
 	}
 
 	public void sendDeactivateMessage(int id) {
 		logger.info("Sending deactivation message for skill " + id);
-		Object message[] = {id, "deactivate"};
+		SkillMessage message = new SkillMessage(id, "deactivate");
 		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill", message);
 	}
 }
