@@ -19,10 +19,10 @@ public class SkillMessenger {
 	@Value("${spring.rabbitmq.exchange:assignforce}")
 	private String exchange;
 
-	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill.delete")
+	@Value("${spring.rabbitmq.skill-routing-delete:assignforce.skill")
 	private String routingKey;
 
-	@Value("${spring.rabbitmq.skill-routing-deactivate:assignforce.skill.deactivate")
+	@Value("${spring.rabbitmq.skill-routing-deactivate:assignforce.skill")
 	private String deactivateKey;
 
 	@Inject
@@ -34,16 +34,19 @@ public class SkillMessenger {
 
 	public void sendCreateMessage(int id){
 		logger.info("Sending create message for skill " +id);
-		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill.create", id);
+		Object message[] = {id, "create"};
+		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill", message);
 	}
 
 	public void sendDeletionMessage(int id) {
 		logger.info("Sending deletion message for skill " + id);
-		rabbitTemplate.convertAndSend(exchange, routingKey, id);
+		Object message[] = {id, "delete"};
+		rabbitTemplate.convertAndSend(exchange, routingKey, message);
 	}
 
 	public void sendDeactivateMessage(int id) {
 		logger.info("Sending deactivation message for skill " + id);
-		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill.deactivate", id);
+		Object message[] = {id, "deactivate"};
+		rabbitTemplate.convertAndSend("assignforce", "assignforce.skill", message);
 	}
 }
