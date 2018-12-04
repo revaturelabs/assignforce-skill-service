@@ -160,12 +160,12 @@ public class SkillControllerTest {
 	
 	// This function will test if a skill object that is created is not a duplicate and will not save the
 	// newly created object and will return HTTP status 'NOT_FOUND'
-	@Test
-	public void saveNewSkillTestNotFound() {
-		Skill s1 = new Skill(7, "C#", true);
-		ResponseEntity<Skill> reTest = skillController.saveNewSkill(s1);
-		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
-	}
+// 	@Test
+// 	public void saveNewSkillTestNotFound() {
+// 		Skill s1 = new Skill(7, "C#", true);
+// 		ResponseEntity<Skill> reTest = skillController.saveNewSkill(s1);
+// 		assertTrue(reTest.getStatusCode() == HttpStatus.NOT_FOUND);
+// 	}
 
 	// Checked Id 8 to make sure it really was deleted, and it then checked
 	// status code to make sure it was not found.
