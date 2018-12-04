@@ -38,8 +38,9 @@ public class SkillSerrviceImpl implements SkillService {
 		// @Column id
 		// if name || id == new name || new id
 		// skip / cancel create skill
-
+		skillMessenger.sendCreateMessage(skill.getSkillId());
 		return skillRepo.save(skill);
+
 	}
 
 	@Override
