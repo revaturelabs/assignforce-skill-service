@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.revature.assignforce.messaging.messenger.SkillMessenger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +21,6 @@ import com.revature.assignforce.beans.Skill;
 import com.revature.assignforce.repository.SkillRepository;
 import com.revature.assignforce.services.SkillSerrviceImpl;
 import com.revature.assignforce.services.SkillService;
-import com.revature.assignforce.messaging.messenger.SkillMessenger;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,21 +40,11 @@ public class SkillServiceImplTest {
 		public SkillRepository SkillRepository() {
 			return Mockito.mock(SkillRepository.class);
 		}
-
-		@Bean
-		public SkillMessenger skillMessenger() {
-			return Mockito.mock(SkillMessenger.class);
-		}
-	@Bean
-		public SkillMessenger SkillMessenger() { return Mockito.mock(SkillMessenger.class); }
-	}
 	
 	@Autowired
 	private SkillService skillService;
 	@Autowired
 	private SkillRepository skillRepository;
-	@Autowired
-	private SkillMessenger skillMessenger;
 
 	// This function test whether the getSkillId() returns the correct id associated with the skill
 	// object and that the HTTP status is 'ok' if the getSkillId() method corresponds with skill 
