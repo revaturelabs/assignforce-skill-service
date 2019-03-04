@@ -4,7 +4,6 @@ import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@EnableRabbit
 @SpringBootApplication
 public class SkillServiceApplication {
 
