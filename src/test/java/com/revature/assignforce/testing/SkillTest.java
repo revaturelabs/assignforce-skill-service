@@ -44,8 +44,13 @@ public class SkillTest {
 	// that is given when created
 	@Test
 	public void skillTest2() {
-		Skill s1 = new Skill(3, "Swift", true);
-		assertTrue(s1.getSkillId() == 3);
+		int testId = 4;
+		String testName = "Swift";
+		boolean testActive = true;
+		Skill s1 = new Skill(testId, testName, testActive);
+		assertTrue("Expected skillId " + testId + ". Got " + s1.getSkillId(), s1.getSkillId() == testId);
+		assertTrue(s1.getSkillName().equals("Swift"));
+		assertTrue(s1.getIsActive());
 	}
 	
 	// This function is to test if the setSkillId() actually sets the new skillId and overrides 
