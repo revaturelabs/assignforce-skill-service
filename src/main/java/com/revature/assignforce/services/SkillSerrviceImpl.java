@@ -3,6 +3,7 @@ package com.revature.assignforce.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.revature.assignforce.SkillsNotifierBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,13 @@ public class SkillSerrviceImpl implements SkillService {
 
 	@Autowired
 	SkillRepository skillRepo;
+
+	SkillsSkillSNSNotificationSender notificationSender;
+
+	@Autowired
+	public void setNotificationSender(SkillsSkillSNSNotificationSender notificationSender) {
+		this.notificationSender = notificationSender;
+	}
 
 	@Override
 	public Optional<Skill> getSkillById(int id) {
@@ -29,12 +37,8 @@ public class SkillSerrviceImpl implements SkillService {
 
 	@Override // Create Check for Duplicate skill name. If duplicate, ignore.
 	public Skill createSkill(Skill skill) {
-
-		// @Column name
-		// @Column id
-		// if name || id == new name || new id
-		// skip / cancel create skill
 		Skill s = skillRepo.save(skill);
+		notificationSender.sendAddNotification(new SkillsNotifierBean(s.getSkillId()));
 		return s;
 
 	}
@@ -46,8 +50,8 @@ public class SkillSerrviceImpl implements SkillService {
 
 	@Override
 	public void deleteSkill(int id) {
+		notificationSender.sendDeleteNotification(new SkillsNotifierBean(id));
 		skillRepo.deleteById(id);
-		
 	}
 	
 }
