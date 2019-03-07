@@ -17,10 +17,10 @@ public class SkillSerrviceImpl implements SkillService {
 	@Autowired
 	SkillRepository skillRepo;
 
-	SkillsSkillSNSNotificationSender notificationSender;
+	SkillsSNSNotificationSender notificationSender;
 
 	@Autowired
-	public void setNotificationSender(SkillsSkillSNSNotificationSender notificationSender) {
+	public void setNotificationSender(SkillsSNSNotificationSender notificationSender) {
 		this.notificationSender = notificationSender;
 	}
 

@@ -7,11 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.amazonaws.services.sns.AmazonSNS;
+import com.revature.assignforce.services.SkillsSNSNotificationSender;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,9 +32,21 @@ import com.revature.assignforce.services.SkillService;
 @SpringBootTest
 public class SkillServiceImplTest {
 
+    static AmazonSNS amazonSNS;
+    static NotificationMessagingTemplate notificationMessagingTemplate;
+
+    @BeforeClass
+    public static void init() {
+        amazonSNS = Mockito.mock(AmazonSNS.class);
+        notificationMessagingTemplate = Mockito.mock(NotificationMessagingTemplate.class);
+    }
+
     // Add this section for application context.
     @Configuration
     static class SkillServiceTestContextConfiguration {
+
+        @Bean
+        public SkillsSNSNotificationSender skillsSNSNotificationSender() { return new SkillsSNSNotificationSender(notificationMessagingTemplate); }
 
         @Bean
         public SkillService skillService() {
@@ -45,6 +63,9 @@ public class SkillServiceImplTest {
     private SkillService skillService;
     @Autowired
     private SkillRepository skillRepository;
+
+    @Autowired
+    private SkillsSNSNotificationSender skillsSNSNotificationSender;
 
     // This function test whether the getSkillId() returns the correct id associated with the skill
     // object and that the HTTP status is 'ok' if the getSkillId() method corresponds with skill

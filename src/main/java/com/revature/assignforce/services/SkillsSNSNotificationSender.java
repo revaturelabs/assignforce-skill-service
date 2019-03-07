@@ -9,7 +9,7 @@ import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplat
 import org.springframework.stereotype.Service;
 
 @Service
-public class SkillsSkillSNSNotificationSender implements SkillSNSNotifier {
+public class SkillsSNSNotificationSender implements SkillSNSNotifier {
     @Value("${app.sns.topics.add-skill}")
     private String snsSkillsAddTopic;
 
@@ -19,7 +19,7 @@ public class SkillsSkillSNSNotificationSender implements SkillSNSNotifier {
     private final NotificationMessagingTemplate notificationMessagingTemplate;
 
     @Autowired
-    public SkillsSkillSNSNotificationSender(NotificationMessagingTemplate notificationMessagingTemplate) {
+    public SkillsSNSNotificationSender(NotificationMessagingTemplate notificationMessagingTemplate) {
         this.notificationMessagingTemplate = notificationMessagingTemplate;
     }
 
