@@ -45,12 +45,12 @@ public class SkillSerrviceImpl implements SkillService {
 
 	@Override
 	public Skill updateSkill(Skill skill) {
+		notificationSender.sendDeleteNotification(new SkillsNotifierBean(skill.getSkillId()));
 		return skillRepo.save(skill);
 	}
 
 	@Override
 	public void deleteSkill(int id) {
-		notificationSender.sendDeleteNotification(new SkillsNotifierBean(id));
 		skillRepo.deleteById(id);
 	}
 	
