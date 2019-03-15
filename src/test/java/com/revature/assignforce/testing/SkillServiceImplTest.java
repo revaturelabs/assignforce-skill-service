@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.revature.assignforce.beans.Skill;
 import com.revature.assignforce.repository.SkillRepository;
-import com.revature.assignforce.services.SkillSerrviceImpl;
+import com.revature.assignforce.services.SkillServiceImpl;
 import com.revature.assignforce.services.SkillService;
 
 
@@ -50,7 +50,7 @@ public class SkillServiceImplTest {
 
         @Bean
         public SkillService skillService() {
-            return new SkillSerrviceImpl();
+            return new SkillServiceImpl();
         }
 
         @Bean
