@@ -64,10 +64,11 @@ public class SkillController {
 	public ResponseEntity<Skill> saveNewSkill(@RequestBody @Validated(Skill.New.class) Skill skill) {
 		Skill newSkill = skillServ.createSkill(skill);
 
+
 		if (newSkill != null) {
-			return new ResponseEntity<>(newSkill, HttpStatus.OK);
+			return new ResponseEntity<>(newSkill, HttpStatus.CREATED);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

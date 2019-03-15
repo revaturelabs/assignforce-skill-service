@@ -1,4 +1,4 @@
-package com.revature.assignforce.securityConfig;
+package com.revature.assignforce.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
