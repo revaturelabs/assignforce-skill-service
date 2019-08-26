@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 
@@ -29,12 +30,14 @@ public class Skill {
 	@NotNull(message = "Skill must have id.", groups = {New.class, Existing.class})
 	@Range(min = 0, max = 0, message = "New Skill must have id of 0", groups = {New.class})
 	@Positive(message = "Existing Skill must have a positive id number", groups = {Existing.class})
+	@JsonProperty(value="id")
 	private Integer skillId;
 	
 	@Column(name = "SKILLNAME")
 	@NotEmpty(message = "Skill must not be empty.")
 	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
 	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
+	@JsonProperty(value="name")
 	private String skillName;
 	
 	@Column(name="IS_ACTIVE")
