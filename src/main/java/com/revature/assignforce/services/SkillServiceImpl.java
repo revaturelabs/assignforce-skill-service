@@ -42,6 +42,7 @@ public class SkillServiceImpl implements SkillService {
 	@Override // Create Check for Duplicate skill name. If duplicate, ignore.
 	public Skill createSkill(Skill skill) {
 		Skill s = skillRepo.save(skill);
+		LOG.info("Pushing message for adding skill {}", skill.getSkillId());
 		notificationSender.sendAddNotification(new SkillsNotifierBean(s.getSkillId()));
 		return s;
 

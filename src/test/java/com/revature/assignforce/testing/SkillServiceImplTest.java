@@ -54,7 +54,7 @@ public class SkillServiceImplTest {
         }
 
         @Bean
-        public SkillRepository SkillRepository() {
+        public SkillRepository skillRepository() {
             return Mockito.mock(SkillRepository.class);
         }
     }
