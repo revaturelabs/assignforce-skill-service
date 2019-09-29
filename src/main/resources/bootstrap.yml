@@ -1,11 +1,15 @@
 spring:
-  profiles:
-    active: ${ACTIVE_PROFILES:default}
-  cloud:
-    config:
-      uri: ${CONFIG_URL}
   application:
     name: skill-service
+  profiles:
+    active: ${PROFILE:default}
+  cloud:
+    config:
+      uri: ${CONFIG_URL:http://localhost:8888}
+      name: skill-service
+      profile: ${PROFILE}
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
 management:
   endpoints:
     web:
