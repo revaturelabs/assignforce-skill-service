@@ -1,14 +1,15 @@
 package com.revature.assignforce.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.assignforce.SkillsNotifierBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import com.mangofactory.swagger.plugin.EnableSwagger;
+import com.revature.assignforce.SkillsNotifierBean;
+
 @Service
+@EnableSwagger
 public class SkillsSNSNotificationSender implements SkillSNSNotifier {
     @Value("${app.sns.topics.add-skill}")
     private String snsSkillsAddTopic;

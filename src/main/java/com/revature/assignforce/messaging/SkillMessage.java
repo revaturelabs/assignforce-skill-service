@@ -1,5 +1,9 @@
 package com.revature.assignforce.messaging;
 
+import com.mangofactory.swagger.plugin.EnableSwagger;
+
+@EnableSwagger
+// bean that responsive for comments for skill
 public class SkillMessage {
     private int skillId;
     private String context;

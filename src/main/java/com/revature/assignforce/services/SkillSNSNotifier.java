@@ -1,10 +1,14 @@
 package com.revature.assignforce.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.assignforce.SkillsNotifierBean;
 import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+import com.revature.assignforce.SkillsNotifierBean;
+
+@EnableSwagger
+// INterface that has list of methods responsible for send message
 public interface SkillSNSNotifier {
     void sendDeleteNotification(SkillsNotifierBean skillsNotifierBean);
     void sendAddNotification(SkillsNotifierBean skillsNotifierBean);
