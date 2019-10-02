@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +21,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.revature.assignforce.beans.Skill;
 import com.revature.assignforce.containers.SkillsArray;
 import com.revature.assignforce.services.SkillService;
+import com.wordnik.swagger.annotations.Api;
 
 @RestController
+@EnableSwagger
+@Api(value="skills-data", description="Operations define skills while create a portfolio")
 public class SkillController {
 
 	Logger logger = LoggerFactory.getLogger(SkillController.class);
@@ -34,12 +37,14 @@ public class SkillController {
 	@Autowired
 	private SkillService skillServ;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	// map get all skills by type based on settings APPLICATION_JSON_VALUE
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)	
 	public List<Skill> getAll() {
 		
 		return skillServ.getAll();
 	}
 
+	// get skill by id
 	@GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> getById(@PathVariable("id") int id) {
 		Optional<Skill> skill = skillServ.getSkillById(id);
@@ -48,6 +53,7 @@ public class SkillController {
 		return new ResponseEntity<>(skill.get(), HttpStatus.OK);
 	}
 
+	// get optional skill by id from skill array
 	@PostMapping(value = "by-array", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Skill>> getByArray(@RequestBody @Valid SkillsArray arr) {
 		List<Skill> skills = new ArrayList<>();
@@ -60,6 +66,7 @@ public class SkillController {
 		return new ResponseEntity<>(skills, HttpStatus.OK);
 	}
 
+	// create new skill in skill array 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> saveNewSkill(@RequestBody @Validated(Skill.New.class) Skill skill) {
 		Skill newSkill = skillServ.createSkill(skill);
@@ -72,12 +79,14 @@ public class SkillController {
 		}
 	}
 
+	// delete skill by id
 	@DeleteMapping(value = "{id}")
 	public ResponseEntity<Skill> deleteSkill(@PathVariable("id") int id) {
 		skillServ.deleteSkill(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	// update skill based on skill name
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Skill> updateSkill(@RequestBody @Validated(Skill.Existing.class) Skill skill) {
 		logger.info("Updating skill ", skill.getSkillName());

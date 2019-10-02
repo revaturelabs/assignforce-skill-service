@@ -12,35 +12,38 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mangofactory.swagger.plugin.EnableSwagger;
+
 @Component
 @Entity
-@Table(name="SKILL")
+@Table(name="SKILL") // map table SKILL to DB
+@EnableSwagger
 public class Skill {
 
 	// Weird Annotations
 
-	@Id
+	@Id //create column SKILL_ID that can't be empty, null and must be positive
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="skill")
 	@SequenceGenerator(name="skill", sequenceName="skill_seq", allocationSize=1)
-	@Column(name="SKILL_ID")
+	@Column(name="SKILL_ID") 
 	@NotNull(message = "Skill must have id.", groups = {New.class, Existing.class})
 	@Range(min = 0, max = 0, message = "New Skill must have id of 0", groups = {New.class})
 	@Positive(message = "Existing Skill must have a positive id number", groups = {Existing.class})
 	@JsonProperty(value="id")
 	private Integer skillId;
 	
-	@Column(name = "SKILLNAME")
+	@Column(name = "SKILLNAME") //create column SKILLNAME that can't be empty, null and must be has long from 1 to 128 
 	@NotEmpty(message = "Skill must not be empty.")
 	@NotNull(message = "Skill must have a name.", groups = {New.class, Existing.class})
 	@Size(min = 1, max = 128, message = "Skill name must be between 1 and 128 characters", groups = {New.class, Existing.class})
 	@JsonProperty(value="name")
 	private String skillName;
 	
-	@Column(name="IS_ACTIVE")
+	@Column(name="IS_ACTIVE") //create column IS_ACTIVE that can't be null
 	@NotNull(message = "Skill must define whether it is active.", groups = {New.class, Existing.class})
 	private Boolean isActive;
 
@@ -53,6 +56,7 @@ public class Skill {
 		super();
 	}
 
+	// parameterized constructor based on variables 
 	public Skill(int skillId, String skillName, Boolean isActive) {
 		super();
 		this.skillId = skillId;
@@ -60,6 +64,7 @@ public class Skill {
 		this.isActive = isActive;
 	}
 
+	// Getters and Setters
 	public int getSkillId() {
 		return skillId;
 	}
