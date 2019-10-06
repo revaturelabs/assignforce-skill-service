@@ -2,10 +2,17 @@ package com.revature.assignforce.containers;
 
 import java.util.List;
 
-import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.revature.assignforce.beans.Skill;
 
-@EnableSwagger
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/*
+ * 
+ * SkillsArray based on List structure, store information about Skills
+ *
+ */
+
+@EnableSwagger2
 // class that response to set skills of batch students for creating portfolio
 public class SkillsArray {
 	List<Skill> skills;

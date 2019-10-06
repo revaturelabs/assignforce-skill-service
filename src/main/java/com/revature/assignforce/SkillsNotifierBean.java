@@ -1,8 +1,14 @@
 package com.revature.assignforce;
 
-import com.mangofactory.swagger.plugin.EnableSwagger;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger
+/*
+ * 
+ * A SkillsNotifierBean - creating field, constructor, getter and setter based on - skillid
+ *
+ */
+
+@EnableSwagger2
 public class SkillsNotifierBean {
     private int skillId;
 

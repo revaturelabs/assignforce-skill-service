@@ -1,8 +1,13 @@
 package com.revature.assignforce.messaging;
 
-import com.mangofactory.swagger.plugin.EnableSwagger;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger
+/*
+ * 
+ * SkillMessage to add message to skill based on skillid 
+ *
+ */
+@EnableSwagger2
 // bean that responsive for comments for skill
 public class SkillMessage {
     private int skillId;

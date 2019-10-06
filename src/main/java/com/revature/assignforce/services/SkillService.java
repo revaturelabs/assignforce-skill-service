@@ -2,11 +2,20 @@ package com.revature.assignforce.services;
 
 import java.util.List;
 import java.util.Optional;
-
-import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.revature.assignforce.beans.Skill;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger
+/*
+ * 
+ * DAO consist list of all methods:
+ *  - get all skills
+ *  - get skill by id (optional)
+ *  - create skill 
+ *  - update skill
+ *  - delete skill by id 
+ *
+ */
+@EnableSwagger2
 
 // DAO that consist list of method used in DAOImpl 
 public interface SkillService {

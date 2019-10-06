@@ -16,12 +16,19 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mangofactory.swagger.plugin.EnableSwagger;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/*
+ * 
+ * A Skill - create table SKILL in DB with column ("SKILL_ID", "SKILLNAME", "IS_ACTIVE")
+ * also constructor based on variable used for column's name, getters and setters 
+ *
+ */
 @Component
 @Entity
 @Table(name="SKILL") // map table SKILL to DB
-@EnableSwagger
+@EnableSwagger2
 public class Skill {
 
 	// Weird Annotations

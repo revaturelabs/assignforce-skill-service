@@ -13,6 +13,13 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.service.VendorExtension;
 
+/*
+ * 
+ * SwaggerConfig for creating documentation based on Swagger2, that consist contact information apiInfo 
+ *
+ */
+
+//Create swagger configuration for JAVA documentation
 @Configuration
 @EnableSwagger2
 // Swagger config for creating JAVA documentation
