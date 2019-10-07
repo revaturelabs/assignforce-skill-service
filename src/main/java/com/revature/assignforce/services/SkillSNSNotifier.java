@@ -4,10 +4,11 @@ import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplat
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.revature.assignforce.SkillsNotifierBean;
 
-@EnableSwagger
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@EnableSwagger2
 // INterface that has list of methods responsible for send message
 public interface SkillSNSNotifier {
     void sendDeleteNotification(SkillsNotifierBean skillsNotifierBean);

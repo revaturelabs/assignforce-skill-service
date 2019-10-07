@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.revature.assignforce.SkillsNotifierBean;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @Service
-@EnableSwagger
+@EnableSwagger2
 public class SkillsSNSNotificationSender implements SkillSNSNotifier {
     @Value("${app.sns.topics.add-skill}")
     private String snsSkillsAddTopic;
