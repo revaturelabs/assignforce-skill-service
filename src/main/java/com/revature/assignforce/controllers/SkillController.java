@@ -26,6 +26,7 @@ import com.revature.assignforce.containers.SkillsArray;
 import com.revature.assignforce.services.SkillService;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /*
@@ -49,7 +50,10 @@ public class SkillController {
 	 */
 
 	// map get all skills by type based on settings APPLICATION_JSON_VALUE
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)	
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Get All Skills", 
+	response = Skill.class, responseContainer="List", 
+	tags = "SkillController", nickname= "getAllSkills")
 	public List<Skill> getAll() {
 		
 		return skillServ.getAll();
