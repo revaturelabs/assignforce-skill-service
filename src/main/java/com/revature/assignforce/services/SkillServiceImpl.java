@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.revature.assignforce.SkillsNotifierBean;
@@ -26,8 +27,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *  - delete skill by id 
  *
  */
+
 @Service
 @Transactional
+/*
+ * Only an user with an SVP role should have access 
+ * to these methods.
+ */
+//@PreAuthorize("hasRole('SVP')")
+
 @EnableSwagger2
 public class SkillServiceImpl implements SkillService {
 	private static String name = "Skill";
@@ -76,7 +84,6 @@ public class SkillServiceImpl implements SkillService {
 	@Override // Create Check for Duplicate skill name. If duplicate, ignore.
 	public Skill createSkill(Skill skill) {
 		Skill s = skillRepo.save(skill);
-		LOG.info("Pushing message for adding skill {}", skill.getSkillId());
 		notificationSender.sendAddNotification(new SkillsNotifierBean(s.getSkillId()));
 		return s;
 
