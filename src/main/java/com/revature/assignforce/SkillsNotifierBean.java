@@ -1,15 +1,25 @@
 package com.revature.assignforce;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/*
+ * 
+ * A SkillsNotifierBean - creating field, constructor, getter and setter based on - skillid
+ *
+ */
+
+@EnableSwagger2
 public class SkillsNotifierBean {
     private int skillId;
 
-    public SkillsNotifierBean() {
+    public SkillsNotifierBean() { // default constructor created by Spring STS  
     }
 
-    public SkillsNotifierBean(int skillId) {
+    public SkillsNotifierBean(int skillId) { // parameterized constructor 
         this.skillId = skillId;
     }
 
+    // Getter and Setter based on variable "skillId"
     public int getSkillId() {
         return skillId;
     }
