@@ -6,9 +6,11 @@ import com.revature.assignforce.SkillsNotifierBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 @Service
+//@PreAuthorize("hasRole('SVP')")
 public class SkillsSNSNotificationSender implements SkillSNSNotifier {
     @Value("${app.sns.topics.add-skill}")
     private String snsSkillsAddTopic;
