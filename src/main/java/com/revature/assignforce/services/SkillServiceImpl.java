@@ -7,6 +7,7 @@ import com.revature.assignforce.SkillsNotifierBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.revature.assignforce.beans.Skill;
@@ -17,6 +18,8 @@ import com.revature.assignforce.repository.SkillRepository;
 public class SkillServiceImpl implements SkillService {
 	private static String name = "Skill";
 	private static final Logger LOG = LoggerFactory.getLogger(name);
+
+
 
 	@Autowired
 	SkillRepository skillRepo;
@@ -33,9 +36,10 @@ public class SkillServiceImpl implements SkillService {
 		return skillRepo.findById(id);
 	}
 
+
 	@Override
 	public List<Skill> getAll() {
-		
+		System.out.println("Hey I was here");
 		return skillRepo.findAll();
 	}
 

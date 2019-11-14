@@ -3,6 +3,7 @@ package com.revature.assignforce;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.aws.messaging.config.annotation.EnableSns;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 @SpringBootApplication
 public class SkillServiceApplication {

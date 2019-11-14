@@ -1,48 +1,63 @@
 package com.revature.assignforce.testing;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.assignforce.beans.Skill;
-import com.revature.assignforce.containers.SkillsArray;
+import com.revature.assignforce.config.MethodSecurityConfig;
+import com.revature.assignforce.config.SecurityConfig;
 import com.revature.assignforce.controllers.SkillController;
 import com.revature.assignforce.services.SkillService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@RunWith(MockitoJUnitRunner.class)
-//@SpringBootTest
+//@RunWith(MockitoJUnitRunner.class)
+
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {SkillController.class, SkillService.class})
+@WebMvcTest(SkillController.class)
 public class SkillControllerTest {
 
+	@Configuration
+	static class SkillServiceTestContextConfiguration {
+
+		@Bean
+		public SkillService SkillService() {
+			return Mockito.mock(SkillService.class);
+		}
+	}//pattern me
+
+    @Autowired
 	private MockMvc mvc;
 
-	@Mock
+	@MockBean
 	private SkillService skillService;
 
 	@InjectMocks
+	@Autowired
 	private SkillController skillController;
 
 	private JacksonTester<Skill> jsonSkill;
@@ -51,15 +66,20 @@ public class SkillControllerTest {
 	@Before
 	public void setup() {
 		JacksonTester.initFields(this, new ObjectMapper());
-		mvc = MockMvcBuilders.standaloneSetup(skillController)
-				.build();
+//		mvc = MockMvcBuilders.standaloneSetup(skillController)
+//				.build();
 	}
 
-	
+	@Test
+	public void createContext(){
+	}
 	// This function test whether the skills that created are actually saved in the Database
 	// and returns all the skills that are saved 
+
 	@Test
+	@WithMockUser(roles = {"lel"})
 	public void getAllTest() throws Exception {
+
 		Skill s1 = new Skill(2, "Spring", true);
 		Skill s2 = new Skill(1, "Java", true);
 		List<Skill> skillList = new ArrayList<Skill>();
@@ -72,13 +92,13 @@ public class SkillControllerTest {
 				.andReturn().getResponse();
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		assertThat(response.getContentAsString()).isEqualTo(jsonListSkill.write(skillList).getJson());
-
 	}
 	
 	// This function test whether the getSkillId() returns the correct id associated with the skill
 	// object and that the HTTP status is 'ok' if the getSkillId() method corresponds with skill 
 	// object's id 
 	@Test
+	@WithMockUser(roles = {"lel"})
 	public void getByIdTestOk() throws Exception {
 		Skill s1 = new Skill(2, "Spring", true);
 		Optional<Skill> op1 = Optional.ofNullable(s1);
@@ -90,10 +110,11 @@ public class SkillControllerTest {
 		assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		assertThat(response.getContentAsString()).isEqualTo(jsonSkill.write(op1.get()).getJson());
 	}
-//
-//	// This function test if the HTTP status is set to Response Entity is set to 'NOT_FOUND'
-//	// when you try to get a skill Id that is not saved or yet instantiated
+
+// This function test if the HTTP status is set to Response Entity is set to 'NOT_FOUND'
+// when you try to get a skill Id that is not saved or yet instantiated
 	@Test
+	@WithMockUser(roles = {"lel"})
 	public void getByIdTestNotFound() throws Exception {
 		given(skillService.getSkillById(13)).willReturn(Optional.ofNullable(null));
 		MockHttpServletResponse response = mvc.perform(
